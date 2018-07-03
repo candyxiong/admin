@@ -1,5 +1,6 @@
 <template>
   <div class="customers center">
+    <alert v-bind:message="alert"></alert>
     <h2>{{title}}</h2>
     <table>
       <thead>
@@ -23,13 +24,18 @@
 </template>
 
 <script>
+  import Alert from './Alert'
   export default {
     name: 'Customers',
     data () {
       return {
         title:'用户管理系统',
-        customers:[]
+        customers:[],
+        alert:''
       }
+    },
+    components:{
+      Alert
     },
     methods:{
       customerData(){
@@ -45,8 +51,13 @@
       }
     },
     created(){
+      this.alert = this.$route.query.alert;
+      this.customerData();
+    },
+    updated(){
       this.customerData();
     }
+
   }
 </script>
 

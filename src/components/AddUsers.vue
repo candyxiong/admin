@@ -62,7 +62,7 @@
         that.$http.post('http://localhost:3000/users',data)
         .then(function(res){
           console.log(res);
-          that.$router.push({path:"/"})
+          that.$router.push({path:"/",query:{alert:'用户信息添加成功!'}})
         })
         .catch(function(error){
           console.log(error)
