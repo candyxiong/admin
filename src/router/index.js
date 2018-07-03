@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import About from '@/components/About'
+import AddUsers from '@/components/AddUsers'
+
 import Customers from '@/components/Customers'
 
 Vue.use(Router)
@@ -10,13 +12,18 @@ export default new Router({
   routes:[
     {
       path:'/',
-      name:'Customers',
+      name:'customers',
       component:Customers
     },
     {
-      path:'/About',
-      name:'About',
+      path:'/about',
+      name:'about',
       component:About
+    },
+    {
+      path:'/addUsers',
+      name:'addUsers',
+      component:AddUsers
     }
   ]
 })

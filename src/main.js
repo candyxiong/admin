@@ -4,10 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import VeeValidate,{Validator} from 'vee-validate'
+import zh from 'vee-validate/dist/locale/zh_CN';
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
-
+Vue.use(VeeValidate)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -4,7 +4,8 @@
       <ul>
         <li>用户管理系统</li>
         <li><router-link to="/">主页</router-link></li>
-        <li><router-link to="/About">关于我们</router-link></li>
+        <li><router-link to="/about">关于我们</router-link></li>
+        <li style="float: right"><router-link to="/addUsers">添加用户</router-link></li>
       </ul>
     </header>
     <router-view></router-view>
@@ -20,7 +21,7 @@
 </script>
 
 <style>
-*{margin: 0;padding: 0}
+*{margin: 0;padding: 0;box-sizing:border-box;}
 header{border-bottom: 1px #ddd solid}
 header ul{width: 80%;margin:0 auto;padding: 10px 0;}
 ul li{list-style-type: none;display: inline-block}
