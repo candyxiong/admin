@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import About from '@/components/About'
 import AddUsers from '@/components/AddUsers'
+import CusDetails from '@/components/cusDetails'
+
 
 import Customers from '@/components/Customers'
 
@@ -24,6 +26,11 @@ export default new Router({
       path:'/addUsers',
       name:'addUsers',
       component:AddUsers
+    },
+    {
+      path:'/cusDetails/:id',
+      name:'cusDetails',
+      component:CusDetails
     }
   ]
 })

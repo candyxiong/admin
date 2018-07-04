@@ -8,7 +8,7 @@
           <th>姓名</th>
           <th>电话</th>
           <th>email</th>
-          <th></th>
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
@@ -16,7 +16,7 @@
           <td>{{customer.name}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.email}}</td>
-          <td></td>
+          <td><router-link v-bind:to="'/cusDetails/' + customer.id">详情</router-link></td>
         </tr>
       </tbody>
     </table>
@@ -43,7 +43,7 @@
         that.$http.get('http://localhost:3000/users')
           .then(function(res){
             that.customers = res.data;
-            console.log(res.data);
+            //console.log(res.data);
         })
           .catch(function(error){
             console.log(error)
