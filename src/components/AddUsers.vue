@@ -29,7 +29,7 @@
           </li>
           <li>
             <h4>个人简介</h4>
-            <textarea name="info" cols="30" rows="10" v-model="customer.info"></textarea>
+            <textarea name="info" cols="30" rows="10" v-model="customer.profile"></textarea>
           </li>
         </ul>
         <button type="submit">添加</button>

@@ -16,7 +16,8 @@
           <td>{{customer.name}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.email}}</td>
-          <td><router-link v-bind:to="'/cusDetails/' + customer.id">详情</router-link></td>
+          <td><router-link v-bind:to="'/cusDetails/' + customer.id">详情</router-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -29,7 +30,7 @@
     name: 'Customers',
     data () {
       return {
-        title:'用户管理系统',
+        title:'首页',
         customers:[],
         alert:''
       }
@@ -63,6 +64,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  h2{text-align: center}
   .center{margin: 0 auto;width: 80%}
   table{width: 100%}
   table thead tr th,table tbody tr td{width: 25%;border-bottom: 1px #ddd solid;padding: 10px 0;text-align: center}
