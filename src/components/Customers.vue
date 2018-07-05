@@ -2,6 +2,7 @@
   <div class="customers center">
     <alert v-bind:message="alert"></alert>
     <h2>{{title}}</h2>
+    <input type="text" placeholder="搜索名字" v-model="searchInfo">
     <table>
       <thead>
         <tr>
@@ -12,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="customer in customers">
+        <tr v-for="customer in filterBy(customers,searchInfo)">
           <td>{{customer.name}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.email}}</td>
@@ -32,7 +33,8 @@
       return {
         title:'首页',
         customers:[],
-        alert:''
+        alert:'',
+        searchInfo:''
       }
     },
     components:{
@@ -49,10 +51,15 @@
           .catch(function(error){
             console.log(error)
         })
+      },
+      filterBy(customers,value){
+        return customers.filter(function(customer){
+          return customer.name.match(value)
+        })
       }
     },
     created(){
-      this.alert = this.$route.query.alert;
+      this.alert = this.$route.query.alert;  //接收
       this.customerData();
     },
     updated(){

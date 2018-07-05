@@ -1,6 +1,7 @@
 <template>
   <div class="edit center">
     <h2>更新用户信息</h2>
+    <alert v-if="alert" v-bind:message="alert"></alert>
     <form v-on:submit="editData" id="formInfo">
       <ul>
         <li>
@@ -29,7 +30,7 @@
         </li>
         <li>
           <h4>个人简介</h4>
-          <textarea name="info" cols="30" rows="10" v-model="customer.info"></textarea>
+          <textarea name="info" cols="30" rows="10" v-model="customer.profile"></textarea>
         </li>
       </ul>
       <button type="submit">添加</button>
@@ -38,11 +39,13 @@
 </template>
 
 <script>
+  import Alert from './Alert'
   export default {
     name: 'edit',
     data () {
       return {
-        customer:{}
+        customer:{},
+        alert:''
       }
     },
     methods:{
@@ -57,35 +60,42 @@
       editData(e){
         var that = this;
         e.preventDefault();
-        let data = {
-          name:this.customer.name,
-          phone:this.customer.phone,
-          email:this.customer.email,
-          education:this.customer.education,
-          graduationschool:this.customer.graduationschool,
-          profession:this.customer.profession,
-          profile:this.customer.profile,
-          id:this.customer.id
+        if(this.customer.name || this.customer.phone || this.customer.email || this.customer.education || this.customer.graduationschool || this.customer.profession || this.customer.profile){
+          let data = {
+            name:this.customer.name,
+            phone:this.customer.phone,
+            email:this.customer.email,
+            education:this.customer.education,
+            graduationschool:this.customer.graduationschool,
+            profession:this.customer.profession,
+            profile:this.customer.profile,
+            id:this.customer.id
+          }
+          that.$http.put('http://localhost:3000/users/'+ this.$route.params.id,data)
+          .then(function(res){
+            console.log(res);
+            that.$router.push({path:"/",query:{alert:'用户信息更新成功!'}})
+          })
+          .catch(function(error){
+            console.log(error)
+          })
+        }else{
+          that.alert = '信息更新成功!'
         }
-        that.$http.put('http://localhost:3000/users/'+ this.$route.params.id,data)
-        .then(function(res){
-          console.log(res);
-          that.$router.push({path:"/",query:{alert:'用户信息更新成功!'}})
-        })
-        .catch(function(error){
-          console.log(error)
-        })
       }
     },
     created(){
       this.fetchCusData(this.$route.params.id);
+    },
+    components:{
+      Alert
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .addUsers h2{text-align: center;margin-bottom: 20px}
+  .edit h2{text-align: center;margin-bottom: 20px}
   .center{margin: 20px auto;width: 80%; padding: 20px;background: #eee}
   #formInfo ul li textarea{width: 100%;padding: 4px}
   #formInfo ul li{display: block;}

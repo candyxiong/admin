@@ -1,6 +1,6 @@
 <template>
   <div class="alert">
-    <h2>{{message}}</h2>
+    <span>{{message}}</span>
   </div>
 </template>
 

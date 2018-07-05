@@ -1,6 +1,7 @@
 <template>
   <div class="addUsers center">
     <h2>添加用户</h2>
+    <alert v-if="alert" v-bind:message="alert"></alert>
     <form v-on:submit="postData" id="formInfo">
         <ul>
           <li>
@@ -38,37 +39,46 @@
 </template>
 
 <script>
+  import Alert from './Alert'
   export default {
     name: 'addUsers',
     data () {
       return {
-        customer:{}
+        customer:{},
+        alert:''
       }
     },
     methods:{
       postData(e){
         var that = this;
         e.preventDefault();
-        let data = {
-          name:this.customer.name,
-          phone:this.customer.phone,
-          email:this.customer.email,
-          education:this.customer.education,
-          graduationschool:this.customer.graduationschool,
-          profession:this.customer.profession,
-          profile:this.customer.profile,
-          id:this.customer.id
+        if(this.customer.name || this.customer.phone || this.customer.email || this.customer.education || this.customer.graduationschool || this.customer.profession || this.customer.profile){
+          let data = {
+            name:this.customer.name,
+            phone:this.customer.phone,
+            email:this.customer.email,
+            education:this.customer.education,
+            graduationschool:this.customer.graduationschool,
+            profession:this.customer.profession,
+            profile:this.customer.profile,
+            id:this.customer.id
+          }
+          that.$http.post('http://localhost:3000/users',data)
+          .then(function(res){
+            console.log(res);
+            that.$router.push({path:"/",query:{alert:'用户信息添加成功!'}})
+          })
+          .catch(function(error){
+            console.log(error)
+          })
+        }else{
+          this.alert = '请填把信息填完！'
         }
-        that.$http.post('http://localhost:3000/users',data)
-        .then(function(res){
-          console.log(res);
-          that.$router.push({path:"/",query:{alert:'用户信息添加成功!'}})
-        })
-        .catch(function(error){
-          console.log(error)
-        })
-        console.log('djjd')
+
       }
+    },
+    components:{
+      Alert
     }
   }
 </script>
